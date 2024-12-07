@@ -1,38 +1,48 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterSelection : MonoBehaviour
 {
     public Color selectedColor = new Color(0.8f, 0.8f, 1f); // Цвет выделения
     private Color originalColor; // Исходный цвет
-    private SpriteRenderer spriteRenderer; // Рендер персонажа
+    private SpriteRenderer spriteRenderer;
 
-    public string characterName; // Имя персонажа
-    public string characterInfo; // Краткая информация
+    public CharacterData characterData; // Данные персонажа
 
-    private bool isSelected = false; // Статус выделения
+    public GameObject infoPanel; // Ссылка на панель меню
+    public Text nameText; // Поле для имени
+    public Text ageText; // Поле для возраста
+    public Text positionText; // Поле для должности
+
+    private bool isMenuOpen = false; // Статус меню
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
-            originalColor = spriteRenderer.color; // Сохраняем оригинальный цвет
+            originalColor = spriteRenderer.color; // Сохраняем исходный цвет
+        }
+
+        if (infoPanel != null)
+        {
+            infoPanel.SetActive(false); // Скрываем панель при старте
         }
     }
 
     void OnMouseDown()
     {
-        isSelected = !isSelected; // Переключаем состояние выделения
+        isMenuOpen = !isMenuOpen; // Переключаем состояние меню
 
-        if (isSelected)
+        if (isMenuOpen)
         {
-            HighlightCharacter(); // Выделяем
-            ShowInfo(); // Отображаем информацию
+            HighlightCharacter(); // Выделяем персонажа
+            ShowInfoMenu(); // Показываем меню
         }
         else
         {
-            UnhighlightCharacter(); // Снимаем выделение
-            HideInfo(); // Скрываем информацию
+            UnhighlightCharacter(); // Убираем выделение
+            HideInfoMenu(); // Скрываем меню
         }
     }
 
@@ -52,16 +62,24 @@ public class CharacterSelection : MonoBehaviour
         }
     }
 
-    void ShowInfo()
+    void ShowInfoMenu()
     {
-        // Здесь логика отображения информации, например:
-        Debug.Log($"Персонаж: {characterName}\nИнформация: {characterInfo}");
-        // Можно создать UI элемент для отображения текста
+        if (infoPanel != null && characterData != null)
+        {
+            infoPanel.SetActive(true); // Показываем меню
+
+            nameText.text = $"Имя: {characterData.name}";
+            ageText.text = $"Возраст: {characterData.age}";
+            positionText.text = $"Должность: {characterData.position}";
+
+        }
     }
 
-    void HideInfo()
+    void HideInfoMenu()
     {
-        // Здесь логика скрытия информации
-        Debug.Log("Скрываем информацию о персонаже");
+        if (infoPanel != null)
+        {
+            infoPanel.SetActive(false); // Скрываем меню
+        }
     }
 }
