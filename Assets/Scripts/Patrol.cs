@@ -20,11 +20,9 @@ public class Patrol : MonoBehaviour
         if (waypoints.Length > 0)
             agent.SetDestination(waypoints[currentWaypointIndex].position);
 
-        // Отключаем изменение ориентации по оси Z
-        agent.updateUpAxis = false;
-
-        // Отключаем вращение по оси Y
+        // Отключаем вращение NavMeshAgent
         agent.updateRotation = false;
+        agent.updateUpAxis = false;
 
         // Устанавливаем начальное время ожидания
         waitTimer = GetWaitTimeForCurrentWaypoint();
@@ -32,6 +30,13 @@ public class Patrol : MonoBehaviour
 
     void Update()
     {
+        // Проверка на паузу
+        if (PauseManager.IsPaused)
+        {
+            agent.velocity = Vector3.zero; // Останавливаем движение
+            return;
+        }
+
         // Проверяем, достиг ли персонаж текущей точки
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
@@ -48,11 +53,21 @@ public class Patrol : MonoBehaviour
         }
 
         // Поворачиваем спрайт в направлении движения
-        Vector3 velocity = agent.desiredVelocity;
-        if (velocity.x > 0.1f)
-            spriteRenderer.flipX = false; // Смотрим вправо
-        else if (velocity.x < -0.1f)
-            spriteRenderer.flipX = true; // Смотрим влево
+        UpdateSpriteRotation();
+    }
+
+    private void UpdateSpriteRotation()
+    {
+        Vector3 velocity = agent.velocity;
+
+        if (velocity.sqrMagnitude > 0.01f) // Убедимся, что персонаж действительно движется
+        {
+            // Рассчитываем угол поворота на основе направления движения
+            float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+
+            // Устанавливаем вращение для персонажа
+            transform.rotation = Quaternion.Euler(0, 0, angle + 90); // Смещаем угол на -90°, чтобы персонаж смотрел вперёд
+        }
     }
 
     private float GetWaitTimeForCurrentWaypoint()
