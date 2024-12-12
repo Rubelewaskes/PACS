@@ -4,6 +4,7 @@ public class DoorTrigger : MonoBehaviour
 {   
     public JournalController journalController;
     public SpriteRenderer doorRenderer;
+    
     void OnTriggerEnter2D(Collider2D other)
     {
         if (doorRenderer != null)
