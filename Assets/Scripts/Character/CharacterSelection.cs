@@ -3,6 +3,7 @@ using UnityEngine;
 public class CharacterSelection : MonoBehaviour
 {
     private bool isMenuOpen = false; // Статус меню
+    public LevelManager levelManager;
 
     void OnMouseDown()
     {
@@ -21,6 +22,10 @@ public class CharacterSelection : MonoBehaviour
                 //characterUIHandler.UnhighlightCharacter(); // Убираем выделение
                 characterUIHandler.HideInfoMenu(); // Скрываем меню
             }
+        }
+        if (levelManager != null)
+        {
+            levelManager.ShowCharacterInfo();
         }
     }
 }

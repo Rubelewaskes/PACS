@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CharacterUIHandler : MonoBehaviour
 {
@@ -9,9 +10,7 @@ public class CharacterUIHandler : MonoBehaviour
     private Material originalMaterial;
 
     public GameObject infoPanel; // Ссылка на панель меню
-    public Text nameText; // Поле для имени
-    public Text ageText; // Поле для возраста
-    public Text positionText; // Поле для должности
+    public TextMeshProUGUI infoText;
 
     public CharacterInformation characterInformation; // Данные персонажа
 
@@ -60,9 +59,13 @@ public class CharacterUIHandler : MonoBehaviour
         {
             infoPanel.SetActive(true); // Показываем меню
 
-            nameText.text = $"Имя: {characterInformation.characterName}";
-            ageText.text = $"Возраст: {characterInformation.age}";
-            positionText.text = $"Должность: {characterInformation.position}";
+            string info = $"ID: {characterInformation.characterID}\n" + 
+                         $"Имя: {characterInformation.characterName}\n" + 
+                         $"Возраст: {characterInformation.age}\n" + 
+                         $"Должность: {characterInformation.position}\n" + 
+                         $"Доступные комнаты: {string.Join(", ", characterInformation.accessibleRooms)}";
+
+            infoText.text = info;
         }
     }
 

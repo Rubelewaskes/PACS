@@ -8,6 +8,8 @@ public enum Gender
 
 public class CharacterInformation : MonoBehaviour
 {
+    [Header("ID")]
+    public int characterID;
     [Header("Имя")]
     public string characterName;
     [Header("Возраст")]
