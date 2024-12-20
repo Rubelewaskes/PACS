@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;  // Не забудьте добавить эту директиву для работы с UnityEvent
+using UnityEngine.Events;
 
 public class PatrolScript : MonoBehaviour
 {
@@ -9,12 +9,11 @@ public class PatrolScript : MonoBehaviour
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
-    private float waitTimer = 0f;
-
-    public LevelManager levelManager; 
+    private float waitTimer = 0f; 
 
     private SpriteRenderer spriteRenderer;
 
+    public UnityEvent PatrolComplete;
 
     void Start()
     {
@@ -91,12 +90,8 @@ public class PatrolScript : MonoBehaviour
         return 0f; // Если не задано, ждать не нужно
     }
 
-    private void OnPatrolComplete()
+    public void OnPatrolComplete()
     {
-        // Если есть ссылка на TutorialManager, вызываем его метод
-        if (levelManager != null)
-        {
-            levelManager.LoadNextScene(); // Загружаем следующую сцену
-        }
+        PatrolComplete?.Invoke();
     }
 }

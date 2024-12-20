@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events; 
 
 public class CharacterSelection : MonoBehaviour
 {
     private bool isMenuOpen = false; // Статус меню
-    public LevelManager levelManager;
 
-    void OnMouseDown()
+    public UnityEvent chooseCharacter;
+    public UnityEvent TriggerMouseDown;
+
+    public void OnMouseDown()
     {
         isMenuOpen = !isMenuOpen; // Переключаем состояние меню
 
@@ -16,6 +19,7 @@ public class CharacterSelection : MonoBehaviour
             {
                 //characterUIHandler.HighlightCharacter(); // Выделяем персонажа
                 characterUIHandler.ShowInfoMenu(); // Показываем меню
+                chooseCharacter?.Invoke();
             }
             else
             {
@@ -23,9 +27,10 @@ public class CharacterSelection : MonoBehaviour
                 characterUIHandler.HideInfoMenu(); // Скрываем меню
             }
         }
-        if (levelManager != null)
-        {
-            levelManager.ShowCharacterInfo();
-        }
+    }
+
+    public void TriggerOnMouseDown()
+    {
+        TriggerMouseDown?.Invoke();
     }
 }

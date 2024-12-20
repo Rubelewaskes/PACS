@@ -5,7 +5,6 @@ public class PauseManager : MonoBehaviour
     public static bool IsPaused { get; private set; } = false; // Статус паузы
 
     public GameObject pauseMenu; // Ссылка на панель паузы (если есть)
-    public LevelManager levelManager;
 
     void Update()
     {
@@ -36,10 +35,6 @@ public class PauseManager : MonoBehaviour
         if (pauseMenu != null)
         {
             pauseMenu.SetActive(false);
-        }
-        if (levelManager != null)
-        {
-            levelManager.HideHint4();
         }
     }
 

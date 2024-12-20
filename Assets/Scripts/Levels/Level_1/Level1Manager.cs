@@ -17,12 +17,16 @@ public class Level1Manager : LevelManager
     private bool wasHint3;
     private bool wasHint4;
 
+    public CharacterSelection CharSel;
+
+    public PauseManager Pause;
+
     // Панель информации о персонаже
     public GameObject helpMenu;
 
     private bool isPaused;
 
-    void Start()
+    public override void Start()
     {
         // Изначально скрываем все подсказки
         hint1.SetActive(false);
@@ -43,39 +47,50 @@ public class Level1Manager : LevelManager
     private IEnumerator ShowHints()
     {
         ShowHint1();
-        yield return new WaitForSecondsRealtime(1f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
+        yield return new WaitForSecondsRealtime(3f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
         ShowHint2();
-        yield return new WaitForSecondsRealtime(2f); // Пауза не влияет на таймеры
+        yield return new WaitForSecondsRealtime(1f); // Пауза не влияет на таймеры
     }
 
     private void ShowHint1()
     {
-        hint1.SetActive(true);
+        if (!wasHint1)
+        {
+            hint1.SetActive(true);
+        }
     }
 
     private void ShowHint2()
     {
-        hint2.SetActive(true);
+        if (!wasHint2)
+        {
+            hint2.SetActive(true);
+        }
     }
 
-    public override void ShowCharacterInfo()
+    public void ShowCharacterInfo()
     {
-        // Закрываем подсказки
-        hint1.SetActive(false);
-        hint2.SetActive(false);
-        wasHint1 = true;
-        wasHint2 = true;
+        if (!wasHint3)
+        {
+            // Закрываем подсказки
+            hint1.SetActive(false);
+            hint2.SetActive(false);
+            wasHint1 = true;
+            wasHint2 = true;
+            
 
-        // Делаем активной третью подсказку
-        hint3.SetActive(true);
+            // Делаем активной третью подсказку
+            hint3.SetActive(true);
 
-        // После 5 секунд скрываем информацию
-        StartCoroutine(CloseHint3());
+            // После 5 секунд скрываем информацию
+            StartCoroutine(CloseHint3());
+        }
     }
 
     private IEnumerator CloseHint3()
     {
         yield return new WaitForSecondsRealtime(5f);
+        CharSel.TriggerOnMouseDown();
         hint3.SetActive(false);
         wasHint3 = true;
         OpenHelpMenu();
@@ -84,23 +99,26 @@ public class Level1Manager : LevelManager
     private void OpenHelpMenu()
     {
         helpMenu.SetActive(true);
-        StartCoroutine(ShowHint4());
     }
 
-    public override IEnumerator ShowHint4()
+    public void ShowHint4()
     {
-        yield return new WaitForSecondsRealtime(5f); // Подсказка будет показана через 5 секунд
-        helpMenu.SetActive(false);
-        hint4.SetActive(true);
+        if (!wasHint4)
+        {
+            hint4.SetActive(true);
+        }
     }
 
-    public override void HideHint4()
+    public void HideHint4()
     {
-        hint4.SetActive(false);
-        wasHint4 = true;
+        if (!wasHint4)
+        {
+            hint4.SetActive(false);
+            wasHint4 = true;
+        }
     }
 
-    public override void LoadNextScene()
+    public void LoadNextScene()
     {
         SceneManager.LoadScene("Level_2");
     }
