@@ -1,16 +1,19 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
-public class Patrol : MonoBehaviour
+public class PatrolScript : MonoBehaviour
 {
     public Transform[] waypoints; // Точки маршрута
     public float[] waitTimes; // Время ожидания на каждой точке
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
-    private float waitTimer = 0f;
+    private float waitTimer = 0f; 
 
     private SpriteRenderer spriteRenderer;
+
+    public UnityEvent PatrolComplete;
 
     void Start()
     {
@@ -42,6 +45,13 @@ public class Patrol : MonoBehaviour
         {
             if (waitTimer <= 0f) // Если таймер ожидания истёк
             {
+                // Если это последняя точка маршрута
+                if (currentWaypointIndex == waypoints.Length - 1)
+                {
+                    OnPatrolComplete(); // Вызов события завершения патрулирования
+                }
+
+                // Переход к следующей точке
                 currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
                 agent.SetDestination(waypoints[currentWaypointIndex].position);
                 waitTimer = GetWaitTimeForCurrentWaypoint(); // Устанавливаем время ожидания для следующей точки
@@ -78,5 +88,10 @@ public class Patrol : MonoBehaviour
             return waitTimes[currentWaypointIndex];
         }
         return 0f; // Если не задано, ждать не нужно
+    }
+
+    public void OnPatrolComplete()
+    {
+        PatrolComplete?.Invoke();
     }
 }
