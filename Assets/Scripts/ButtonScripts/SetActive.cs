@@ -4,14 +4,12 @@ public class ToggleWindow : MonoBehaviour
 {
     public GameObject window; // Ссылка на окно, которое будет скрываться/показываться
 
-    private bool isWindowVisible = false; // Статус видимости окна
-
     public void ToggleVisibility()
     {
         if (window != null)
         {
-            isWindowVisible = !isWindowVisible; // Меняем статус видимости
-            window.SetActive(isWindowVisible); // Включаем/выключаем объект окна
+            bool currentVisibility = window.activeSelf; // Получаем текущий статус видимости
+            window.SetActive(!currentVisibility);      // Меняем на противоположный
         }
     }
 }

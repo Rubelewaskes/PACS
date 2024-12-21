@@ -29,22 +29,16 @@ public class JournalController : MonoBehaviour
         entryButton.onClick.AddListener(() =>
         {
             SelectCharacter(newEntry.character); // Выделяем персонажа
-            JumpToTime(newEntry.timestamp); // Перематываем время (пока не реализовано)
         });
     }
 
     private void SelectCharacter(GameObject character)
     {
-        if (character != null)
+        CharacterUIHandler characterUIHandler = character.GetComponent<CharacterUIHandler>();
+        if (characterUIHandler != null)
         {
-            Debug.Log($"Выделен персонаж: {character.name}");
-            // Здесь будет логика выделения персонажа
+            //characterUIHandler.HighlightCharacter(); // Выделяем персонажа
+            characterUIHandler.ShowInfoMenu(); // Показываем меню
         }
-    }
-
-    private void JumpToTime(float timestamp)
-    {
-        Debug.Log($"Перемотка времени на момент: {timestamp}");
-        // Здесь будет логика перемотки времени
     }
 }
