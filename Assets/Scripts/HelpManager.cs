@@ -47,7 +47,12 @@ public class HelpManager : MonoBehaviour
         // Обновляем текст в правой части
         if (index >= 0 && index < helpData.items.Length)
         {
-            infoText.text = helpData.items[index].content;
+            string content = helpData.items[index].content;
+
+            content = content.Replace("\n", "<br>");
+            content = $"<b><size=30>{helpData.items[index].title}</size></b><br><br>{content}";
+
+            infoText.text = content;
         }
         else
         {
