@@ -6,17 +6,6 @@ using System.Collections;
 
 public class Level1Manager : LevelManager
 {
-    // Панели подсказок
-    public GameObject hint1;
-    public GameObject hint2;
-    public GameObject hint3;
-    public GameObject hint4;
-
-    private bool wasHint1;
-    private bool wasHint2;
-    private bool wasHint3;
-    private bool wasHint4;
-
     public CharacterSelection CharSel;
 
     public PauseManager Pause;
@@ -29,15 +18,15 @@ public class Level1Manager : LevelManager
     public override void Start()
     {
         // Изначально скрываем все подсказки
-        hint1.SetActive(false);
-        hint2.SetActive(false);
-        hint3.SetActive(false);
-        hint4.SetActive(false);
-
-        wasHint1 = false;
-        wasHint2 = false;
-        wasHint3 = false;
-        wasHint4 = false;
+        for (int i = 0; i < hints.Length; i++)
+        {
+            wasHints = new bool[hints.Length];
+            if (hints[i] != null)
+            {
+                hints[i].SetActive(false);
+                wasHints[i] = false;   
+            }
+        }
 
         // Начинаем показ подсказок
         StartCoroutine(ShowHints());
@@ -46,41 +35,22 @@ public class Level1Manager : LevelManager
     // Корутина для показа подсказок
     private IEnumerator ShowHints()
     {
-        ShowHint1();
+        ShowHintByID(0);
         yield return new WaitForSecondsRealtime(3f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
-        ShowHint2();
+        ShowHintByID(1);
         yield return new WaitForSecondsRealtime(1f); // Пауза не влияет на таймеры
-    }
-
-    private void ShowHint1()
-    {
-        if (!wasHint1)
-        {
-            hint1.SetActive(true);
-        }
-    }
-
-    private void ShowHint2()
-    {
-        if (!wasHint2)
-        {
-            hint2.SetActive(true);
-        }
     }
 
     public void ShowCharacterInfo()
     {
-        if (!wasHint3)
+        if (!wasHints[2])
         {
             // Закрываем подсказки
-            hint1.SetActive(false);
-            hint2.SetActive(false);
-            wasHint1 = true;
-            wasHint2 = true;
+            CloseHints(0, 2);
             
 
             // Делаем активной третью подсказку
-            hint3.SetActive(true);
+            ShowHintByID(2);
 
             // После 5 секунд скрываем информацию
             StartCoroutine(CloseHint3());
@@ -91,8 +61,7 @@ public class Level1Manager : LevelManager
     {
         yield return new WaitForSecondsRealtime(5f);
         CharSel.TriggerOnMouseDown();
-        hint3.SetActive(false);
-        wasHint3 = true;
+        CloseHints(2, 3);
         OpenHelpMenu();
     }
 
@@ -103,19 +72,12 @@ public class Level1Manager : LevelManager
 
     public void ShowHint4()
     {
-        if (!wasHint4)
-        {
-            hint4.SetActive(true);
-        }
+        ShowHintByID(3);
     }
 
     public void HideHint4()
     {
-        if (!wasHint4)
-        {
-            hint4.SetActive(false);
-            wasHint4 = true;
-        }
+        CloseHints(3, 4);
     }
 
     public void LoadNextScene()
