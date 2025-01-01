@@ -6,12 +6,8 @@ using System.Collections;
 
 public class Level2Manager : LevelManager
 {
-    // Панели подсказок
-    public GameObject[] hints;
     public Button start;
     public Button pause;
-
-    private bool[] wasHints;
 
     private bool[] selected = {false, false, false};
 
@@ -39,93 +35,21 @@ public class Level2Manager : LevelManager
     // Корутина для показа подсказок
     private IEnumerator ShowHints()
     {
-        ShowHint1();
+        ShowHintByID(0);
         yield return new WaitForSecondsRealtime(2f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
-        ShowHint2();
+        ShowHintByID(1);
         yield return new WaitForSecondsRealtime(0.5f); // Пауза не влияет на таймеры
-        ShowHint3();
+        ShowHintByID(2);
         yield return new WaitForSecondsRealtime(0.5f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
-        ShowHint4();
+        ShowHintByID(3);
         yield return new WaitForSecondsRealtime(3f);
         CloseHints(0, 4);
         yield return new WaitForSecondsRealtime(1f);
-        ShowHint5();
+        ShowHintByID(4);
         yield return new WaitForSecondsRealtime(1f);
-        ShowHint6();
+        ShowHintByID(5);
     }
 
-    private void ShowHint1()
-    {
-        if (!wasHints[0])
-        {
-            hints[0].SetActive(true);
-        }
-    }
-
-    private void ShowHint2()
-    {
-        if (!wasHints[1])
-        {
-            hints[1].SetActive(true);
-        }
-    }
-    private void ShowHint3()
-    {
-        if (!wasHints[2])
-        {
-            hints[2].SetActive(true);
-        }
-    }
-
-    private void ShowHint4()
-    {
-        if (!wasHints[3])
-        {
-            hints[3].SetActive(true);
-        }
-    }
-
-    private void ShowHint5()
-    {
-        if (!wasHints[4])
-        {
-            hints[4].SetActive(true);
-        }
-    }
-
-    private void ShowHint6()
-    {
-        if (!wasHints[5])
-        {
-            hints[5].SetActive(true);
-        }
-    }
-
-    private void ShowHint7()
-    {
-        if (!wasHints[6])
-        {
-            hints[6].SetActive(true);
-        }
-    }
-    private void ShowHint8()
-    {
-        if (!wasHints[7])
-        {
-            hints[7].SetActive(true);
-        }
-    }
-
-    private void CloseHints(int from, int to)
-    {
-        for (int i = from; i < to; i++)
-        {
-            if (!wasHints[i]){
-                wasHints[i] = true;
-                hints[i].SetActive(false);
-            }
-        }
-    }
 
 
     public void SelectedAccounter()
@@ -152,9 +76,9 @@ public class Level2Manager : LevelManager
         {
             CloseHints(4, 6);
 
-            ShowHint7();
+            ShowHintByID(6);
             yield return new WaitForSecondsRealtime(2f);
-            ShowHint8();
+            ShowHintByID(7);
         }
     }
 
