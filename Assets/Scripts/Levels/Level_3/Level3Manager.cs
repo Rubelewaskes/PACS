@@ -36,16 +36,14 @@ public class Level3Manager : LevelManager
     private IEnumerator ShowHints()
     {
         ShowHintByID(0);
-        yield return new WaitForSecondsRealtime(2f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
+        yield return new WaitForSecondsRealtime(3f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
         ShowHintByID(1);
-        yield return new WaitForSecondsRealtime(2f); // Пауза не влияет на таймеры
+        yield return new WaitForSecondsRealtime(3f); // Пауза не влияет на таймеры
         CloseHints(0, 2);
         ShowHintByID(2);
-        yield return new WaitForSecondsRealtime(1f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
+        yield return new WaitForSecondsRealtime(2f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
         ShowHintByID(3);
-        yield return new WaitForSecondsRealtime(1f);
-        CloseHints(2, 4);
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(2f);
         ShowHintByID(4);
         start.interactable = true;
         pause.interactable = true;
@@ -58,7 +56,7 @@ public class Level3Manager : LevelManager
     
     private IEnumerator ShowHintsAfterStart()
     {
-        CloseHints(4, 5);
+        CloseHints(2, 5);
         ShowHintByID(5);
         yield return new WaitForSecondsRealtime(1f);
         ShowHintByID(6);
