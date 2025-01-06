@@ -13138,6 +13138,7 @@ GameObject:
   - component: {fileID: 1818050945}
   - component: {fileID: 1818050944}
   - component: {fileID: 1818050943}
+  - component: {fileID: 1818050947}
   m_Layer: 0
   m_Name: InfoButton
   m_TagString: Untagged
@@ -13207,7 +13208,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1818050944}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1818050947}
+        m_TargetAssemblyTypeName: ToggleWindow, Assembly-CSharp
+        m_MethodName: ToggleVisibility
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1818050944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13301,6 +13314,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1818050947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818050941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb299a149a01804b8cfeebcb5c2e9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  window: {fileID: 2144837879}
 --- !u!1 &1835492890
 GameObject:
   m_ObjectHideFlags: 0
