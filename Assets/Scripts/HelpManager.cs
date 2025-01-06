@@ -42,7 +42,7 @@ public class HelpManager : MonoBehaviour
         }
     }
 
-    void ShowInfo(int index)
+    public void ShowInfo(int index)
     {
         // Обновляем текст в правой части
         if (index >= 0 && index < helpData.items.Length)
