@@ -22,7 +22,7 @@ public class PatrolScript : MonoBehaviour
 
         if (waypoints.Length > 0)
             agent.SetDestination(waypoints[currentWaypointIndex].position);
-
+        
         // Отключаем вращение NavMeshAgent
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -33,37 +33,40 @@ public class PatrolScript : MonoBehaviour
 
     void Update()
     {
-        // Проверка на паузу
-        if (PauseManager.IsPaused)
+        if (waypoints.Length > 0)
         {
-            agent.velocity = Vector3.zero; // Останавливаем движение
-            return;
-        }
-
-        // Проверяем, достиг ли персонаж текущей точки
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
-        {
-            if (waitTimer <= 0f) // Если таймер ожидания истёк
+            // Проверка на паузу
+            if (PauseManager.IsPaused)
             {
-                // Если это последняя точка маршрута
-                if (currentWaypointIndex == waypoints.Length - 1)
+                agent.velocity = Vector3.zero; // Останавливаем движение
+                return;
+            }
+
+            // Проверяем, достиг ли персонаж текущей точки
+            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+            {
+                if (waitTimer <= 0f) // Если таймер ожидания истёк
                 {
-                    OnPatrolComplete(); // Вызов события завершения патрулирования
+                    // Если это последняя точка маршрута
+                    if (currentWaypointIndex == waypoints.Length - 1)
+                    {
+                        OnPatrolComplete(); // Вызов события завершения патрулирования
+                    }
+
+                    // Переход к следующей точке
+                    currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+                    agent.SetDestination(waypoints[currentWaypointIndex].position);
+                    waitTimer = GetWaitTimeForCurrentWaypoint(); // Устанавливаем время ожидания для следующей точки
                 }
+                else
+                {
+                    waitTimer -= Time.deltaTime; // Отсчитываем время ожидания
+                }
+            }
 
-                // Переход к следующей точке
-                currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
-                agent.SetDestination(waypoints[currentWaypointIndex].position);
-                waitTimer = GetWaitTimeForCurrentWaypoint(); // Устанавливаем время ожидания для следующей точки
-            }
-            else
-            {
-                waitTimer -= Time.deltaTime; // Отсчитываем время ожидания
-            }
+            // Поворачиваем спрайт в направлении движения
+            UpdateSpriteRotation();
         }
-
-        // Поворачиваем спрайт в направлении движения
-        UpdateSpriteRotation();
     }
 
     private void UpdateSpriteRotation()
