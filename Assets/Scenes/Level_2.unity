@@ -7023,8 +7023,7 @@ MonoBehaviour:
   - {fileID: 703369981}
   - {fileID: 600344471}
   - {fileID: 600344471}
-  start: {fileID: 194603184}
-  pause: {fileID: 467967541}
+  helpButton: {fileID: 1882136440}
   helpMenuOpened: 0
   Pause: {fileID: 1191817786}
   Help: {fileID: 842546466}
@@ -10090,6 +10089,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 359965805}
     m_Modifications:
+    - target: {fileID: 81967750957877810, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1199850321}
+    - target: {fileID: 81967750957877810, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadNextScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 81967750957877810, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Level2Manager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2416574714205419254, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
       propertyPath: m_text
       value: "\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043D\u0430 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439
@@ -10127,6 +10138,18 @@ PrefabInstance:
       propertyPath: m_overrideHtmlColors
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2565944144449535411, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1199850321}
+    - target: {fileID: 2565944144449535411, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565944144449535411, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Level2Manager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3021013160698825772, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -40
@@ -10134,6 +10157,10 @@ PrefabInstance:
     - target: {fileID: 5231387503115470113, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697082718192244569, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7323588043170197701, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
       propertyPath: m_Pivot.x
@@ -10222,6 +10249,10 @@ PrefabInstance:
     - target: {fileID: 8102542450184150960, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8820922737218383752, guid: 804443635c2e2374491f88f3edcc89dc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -12567,9 +12598,9 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -12583,7 +12614,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1882136441}
   m_OnClick:
     m_PersistentCalls:

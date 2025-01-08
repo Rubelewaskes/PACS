@@ -7,8 +7,7 @@ using System.Linq;
 
 public class Level2Manager : LevelManager
 {
-    public Button start;
-    public Button pause;
+    public Button helpButton;
     public bool helpMenuOpened;
     private bool[] selected = {false, false, false};
     public PauseManager Pause;
@@ -64,6 +63,7 @@ public class Level2Manager : LevelManager
     {
         if (!wasHints[4] && !wasHints[5])
         {
+            helpButton.interactable = true;
             yield return new WaitForSecondsRealtime(3f);
             infoPanel.SetActive(false);
             CloseHints(4, 6);
@@ -80,8 +80,6 @@ public class Level2Manager : LevelManager
         if (!wasHints[6] && !wasHints[7])
         {
             CloseHints(6, 8);
-            start.interactable = true;
-            pause.interactable = true;
             wasHints[6] = true;
             wasHints[7] = true;
             Help.ShowInfo(7);
@@ -102,6 +100,11 @@ public class Level2Manager : LevelManager
         } else {
             ChooseMenu.SetActive(false);
         }
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoadNextScene()
