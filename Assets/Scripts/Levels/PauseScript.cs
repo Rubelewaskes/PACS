@@ -5,6 +5,6 @@ public class PauseScript : MonoBehaviour
     public PauseManager manager;
     void Start()
     {
-        manager.TogglePause();
+        manager.PauseGame();
     }
 }

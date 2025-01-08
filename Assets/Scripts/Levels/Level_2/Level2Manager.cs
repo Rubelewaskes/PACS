@@ -3,16 +3,18 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Linq;
 
 public class Level2Manager : LevelManager
 {
     public Button start;
     public Button pause;
-
+    public bool helpMenuOpened;
     private bool[] selected = {false, false, false};
-
     public PauseManager Pause;
     public HelpManager Help;
+    public GameObject infoPanel;
+    public GameObject ChooseMenu;
 
     private bool isPaused;
 
@@ -36,49 +38,40 @@ public class Level2Manager : LevelManager
     private IEnumerator ShowHints()
     {
         ShowHintByID(0);
-        yield return new WaitForSecondsRealtime(2f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
+        yield return new WaitForSecondsRealtime(2f);
         ShowHintByID(1);
-        yield return new WaitForSecondsRealtime(0.5f); // Пауза не влияет на таймеры
+        yield return new WaitForSecondsRealtime(1f);
         ShowHintByID(2);
-        yield return new WaitForSecondsRealtime(0.5f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
+        yield return new WaitForSecondsRealtime(1f);
         ShowHintByID(3);
         yield return new WaitForSecondsRealtime(3f);
         CloseHints(0, 4);
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
         ShowHintByID(4);
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(3f);
         ShowHintByID(5);
     }
 
-
-
-    public void SelectedAccounter()
+    public void SelectedPeople(int selectedCharachter)
     {
-        selected[0] = true;
-        StartCoroutine(tryShowHints7_8());
-    }
-
-    public void SelectedProgrammer()
-    {
-        selected[1] = true;
-        StartCoroutine(tryShowHints7_8());
-    }
-
-    public void SelectedDirector()
-    {
-        selected[2] = true;
-        StartCoroutine(tryShowHints7_8());
+        selected[selectedCharachter] = true;
+        if (selected.All(b => b) && selected.Length == 3) {
+            StartCoroutine(tryShowHints7_8());
+        }
     }
 
     private IEnumerator tryShowHints7_8()
     {
-        if (selected[0] && selected[1] && selected[2] && !wasHints[4] && !wasHints[5])
+        if (!wasHints[4] && !wasHints[5])
         {
+            yield return new WaitForSecondsRealtime(3f);
+            infoPanel.SetActive(false);
             CloseHints(4, 6);
 
             ShowHintByID(6);
-            yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitForSecondsRealtime(3f);
             ShowHintByID(7);
+            yield return new WaitForSecondsRealtime(3f);
         }
     }
 
@@ -93,7 +86,22 @@ public class Level2Manager : LevelManager
             wasHints[7] = true;
             Help.ShowInfo(7);
         }
-        
+    }
+    public void HelpMenuOpenedToggle() {
+        if (helpMenuOpened == true) {
+            helpMenuOpened = false;
+        } else {
+            helpMenuOpened = true;
+        }
+    }
+
+    public void OpenChooseMenu()
+    {
+        if (!helpMenuOpened) {
+            ChooseMenu.SetActive(true);
+        } else {
+            ChooseMenu.SetActive(false);
+        }
     }
 
     public void LoadNextScene()
