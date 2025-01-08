@@ -29,6 +29,8 @@ public class Level3Manager : LevelManager
 
     public override void Start()
     {
+        Pause.PauseGame();
+
         restartLevelButton.gameObject.SetActive(false);
         nextLevelButton.gameObject.SetActive(false);
 
@@ -129,7 +131,7 @@ public class Level3Manager : LevelManager
     public void StartGame()
     {
         StartCoroutine(ShowHintsAfterStart());
-        OpenChooseMenu(); // тут я пытался вызвать его после отработки скрипта с хождением по комнате, но не получилось
+        // OpenChooseMenu(); // тут я пытался вызвать его после отработки скрипта с хождением по комнате, но не получилось
     }
     
     private IEnumerator ShowHintsAfterStart()
@@ -142,12 +144,12 @@ public class Level3Manager : LevelManager
         ShowHintByID(7);
     }
 
-    private void OpenChooseMenu()
+    public void OpenChooseMenu()
     {
         ChooseMenu.SetActive(true);
     }
 
-    public void RestartScene() // вот тут бага с хождением чубриков, но баг появляется, если вызвать этот метод до нажатия на кнопки старта в сцене
+    public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
