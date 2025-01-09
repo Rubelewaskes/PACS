@@ -21,4 +21,16 @@ public class CharacterInformation : MonoBehaviour
 
     [Header("Доступы")]
     public string[] accessibleRooms;
+
+    public void CopyFrom(CharacterInformation other)
+    {
+        if (other == null) return;
+
+        this.characterID = other.characterID;
+        this.characterName = other.characterName;
+        this.age = other.age;
+        this.position = other.position;
+        this.gender = other.gender;
+        this.accessibleRooms = other.accessibleRooms;
+    }
 }

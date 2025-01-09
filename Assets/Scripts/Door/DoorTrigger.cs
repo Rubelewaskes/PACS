@@ -13,7 +13,7 @@ public class DoorTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // Проверяем, если объект, вошедший в триггер, это персонаж
-        if (other.CompareTag("Worker"))
+        if (other.CompareTag("Worker") || other.CompareTag("Imposter"))
         {
             // Изменяем цвет двери при открытии
             if (doorRenderer != null)
@@ -26,7 +26,7 @@ public class DoorTrigger : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         // Проверяем, если объект, покидающий триггер, это персонаж
-        if (other.CompareTag("Worker"))
+        if (other.CompareTag("Worker") || other.CompareTag("Imposter"))
         {
             // Изменяем цвет двери при закрытии
             if (doorRenderer != null)
