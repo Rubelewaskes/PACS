@@ -4,9 +4,9 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour
 {
     [Header("Мужские имена")]
-    public List<string> maleNames = new List<string> { "Михаил", "Александр", "Иван", "Максим", "Артем", "Лев", "Марк", "Матвей", "Владимир", "Кирилл"};
+    public List<string> maleNames;
     [Header("Женские имена")]
-    public List<string> femaleNames = new List<string> { "Ксения", "Ирина", "Анна", "Мария", "Анастасия", "Виктория", "Евгения"};
+    public List<string> femaleNames;
     public CharacterInformation[] characters;
 
     void Start()
