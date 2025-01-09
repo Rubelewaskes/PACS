@@ -96,5 +96,6 @@ public class PatrolScript : MonoBehaviour
     public void OnPatrolComplete()
     {
         PatrolComplete?.Invoke();
+        return;
     }
 }
