@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class charCounter : MonoBehaviour
+public class CharachterCounter : MonoBehaviour
 {
     public TMP_Text countText;
 
