@@ -45,6 +45,10 @@ public class CharacterUIHandler : MonoBehaviour
         }
     }
 
+    public bool IsPanelActive(){
+        return infoPanel.activeSelf;
+    }
+
     public void UnhighlightCharacter()
     {
         if (spriteRenderer != null)
@@ -55,17 +59,9 @@ public class CharacterUIHandler : MonoBehaviour
 
     public void ShowInfoMenu()
     {
-        if (infoPanel != null && characterInformation != null)
+        if (infoPanel != null )
         {
             infoPanel.SetActive(true); // Показываем меню
-
-            string info = $"ID: {characterInformation.characterID}\n" + 
-                         $"Имя: {characterInformation.characterName}\n" + 
-                         $"Возраст: {characterInformation.age}\n" + 
-                         $"Должность: {characterInformation.position}\n" + 
-                         $"Доступные комнаты: {string.Join(", ", characterInformation.accessibleRooms)}";
-
-            infoText.text = info;
         }
     }
 
@@ -74,6 +70,19 @@ public class CharacterUIHandler : MonoBehaviour
         if (infoPanel != null)
         {
             infoPanel.SetActive(false); // Скрываем меню
+        }
+    }
+
+    public void SetText()
+    {
+        if (characterInformation != null){
+            string info = $"ID: {characterInformation.characterID}\n" + 
+                         $"Имя: {characterInformation.characterName}\n" + 
+                         $"Возраст: {characterInformation.age}\n" + 
+                         $"Должность: {characterInformation.position}\n" + 
+                         $"Доступные комнаты: {string.Join(", ", characterInformation.accessibleRooms)}";
+
+            infoText.text = info;
         }
     }
 }
