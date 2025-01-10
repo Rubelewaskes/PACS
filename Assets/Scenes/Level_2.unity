@@ -4539,7 +4539,6 @@ MonoBehaviour:
   - {fileID: 1663359756}
   - {fileID: 703369981}
   - {fileID: 600344471}
-  - {fileID: 600344471}
   helpButton: {fileID: 1882136440}
   helpMenuOpened: 0
   Pause: {fileID: 1191817786}
