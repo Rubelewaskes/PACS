@@ -1,12 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExitTrigger : MonoBehaviour
 {
-    public JournalController journalController; 
-
+    public JournalController journalController;
+    public GameObject chooseMenu;
+    public ButtonsFillScript fill;
+    private int countExited = 0;
 
     void OnTriggerEnter2D(Collider2D other)
     {
+
         // Проверяем, если объект, вошедший в триггер, это персонаж
         if (other.CompareTag("Worker") || other.CompareTag("Imposter"))
         {
@@ -35,6 +39,13 @@ public class ExitTrigger : MonoBehaviour
             }
 
             other.gameObject.SetActive(false);
+
+            countExited++;
+            if (countExited == 10)
+            {
+                fill.Filling();
+                chooseMenu.SetActive(true);
+            }
         }
     }
 }

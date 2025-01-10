@@ -6,9 +6,13 @@ public class ImposterEnterTrigger : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     // Поля для сохранения исходного состояния персонажа
-    private CharacterInformation originalCharacterInformation;
+    private int originalCharacterID;
+    private string originalCharacterName;
+    private string originalPosition;
+    private int originalAge;
+    private string[] accessibleRooms;
+    private Gender originalGender;
     private Sprite originalSprite;
-    private Color originalColor;
 
     void OnTriggerEnter2D(Collider2D imposter)
     {
@@ -20,16 +24,19 @@ public class ImposterEnterTrigger : MonoBehaviour
             if (imposterCharacterInformation != null && imposterSpriteRenderer != null)
             {
                 // Сохраняем исходное состояние
-                originalCharacterInformation = new CharacterInformation();
-                originalCharacterInformation.CopyFrom(imposterCharacterInformation);
+                originalCharacterID = imposterCharacterInformation.characterID;
+                originalCharacterName = imposterCharacterInformation.characterName;
+                originalPosition = imposterCharacterInformation.position;
+                originalAge = imposterCharacterInformation.age;
+                originalGender = imposterCharacterInformation.gender;
+                accessibleRooms = imposterCharacterInformation.accessibleRooms;
 
                 originalSprite = imposterSpriteRenderer.sprite;
-                originalColor = imposterSpriteRenderer.color;
 
                 // Изменяем свойства персонажа
                 imposterCharacterInformation.CopyFrom(сharacterInformation);
+                
                 imposterSpriteRenderer.sprite = spriteRenderer.sprite;
-                imposterSpriteRenderer.color = spriteRenderer.color;
             }
         }
     }
@@ -44,17 +51,14 @@ public class ImposterEnterTrigger : MonoBehaviour
             if (imposterCharacterInformation != null && imposterSpriteRenderer != null)
             {
                 // Восстанавливаем исходное состояние
-                if (originalCharacterInformation != null)
-                {
-                    imposterCharacterInformation.CopyFrom(originalCharacterInformation);
-                }
+                imposterCharacterInformation.characterID = originalCharacterID;
+                imposterCharacterInformation.characterName = originalCharacterName;
+                imposterCharacterInformation.position = originalPosition;
+                imposterCharacterInformation.age = originalAge;
+                imposterCharacterInformation.gender = originalGender;
+                imposterCharacterInformation.accessibleRooms = accessibleRooms;
 
-                if (originalSprite != null)
-                {
-                    imposterSpriteRenderer.sprite = originalSprite;
-                }
-
-                imposterSpriteRenderer.color = originalColor;
+                imposterSpriteRenderer.sprite = originalSprite;
             }
         }
     }

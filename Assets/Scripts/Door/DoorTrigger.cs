@@ -19,47 +19,49 @@ public class DoorTrigger : MonoBehaviour
             if (doorRenderer != null)
             {
                 doorRenderer.color = openColor;
+                // Проверяем, если объект, покидающий триггер, это персонаж
+                if (other.CompareTag("Worker") || other.CompareTag("Imposter"))
+                {
+
+                    // Получаем компонент персонажа
+                    CharacterInformation сharacterInformation = other.GetComponent<CharacterInformation>();
+                    DoorInformation doorInformation = gameObject.GetComponent<DoorInformation>();
+
+                    // Проверяем, если компонент найден
+                    if (сharacterInformation != null)
+                    {
+                        // Формируем сообщение для журнала
+                        string message = "";
+                        if (сharacterInformation.gender == Gender.Male){
+                            message = $"{сharacterInformation.characterName} прошёл дверь в {doorInformation.roomName}";
+                        }
+                        else if (сharacterInformation.gender == Gender.Female){
+                            message = $"{сharacterInformation.characterName} прошла дверь в {doorInformation.roomName}";
+                        }
+
+                        // Добавляем запись в журнал
+                        if (journalController != null)
+                        {
+                            journalController.AddEntry(message, other.gameObject);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Персонаж не имеет компонента CharacterInformation.");
+                    }
+                }
             }
         }
     }
 
+
     void OnTriggerExit2D(Collider2D other)
     {
-        // Проверяем, если объект, покидающий триггер, это персонаж
-        if (other.CompareTag("Worker") || other.CompareTag("Imposter"))
+        
+        // Изменяем цвет двери при закрытии
+        if (doorRenderer != null)
         {
-            // Изменяем цвет двери при закрытии
-            if (doorRenderer != null)
-            {
-                doorRenderer.color = closedColor;
-            }
-
-            // Получаем компонент персонажа
-            CharacterInformation сharacterInformation = other.GetComponent<CharacterInformation>();
-            DoorInformation doorInformation = gameObject.GetComponent<DoorInformation>();
-
-            // Проверяем, если компонент найден
-            if (сharacterInformation != null)
-            {
-                // Формируем сообщение для журнала
-                string message = "";
-                if (сharacterInformation.gender == Gender.Male){
-                    message = $"{сharacterInformation.characterName} прошёл дверь в {doorInformation.roomName}";
-                }
-                else if (сharacterInformation.gender == Gender.Female){
-                    message = $"{сharacterInformation.characterName} прошла дверь в {doorInformation.roomName}";
-                }
-
-                // Добавляем запись в журнал
-                if (journalController != null)
-                {
-                    journalController.AddEntry(message, other.gameObject);
-                }
-            }
-            else
-            {
-                Debug.LogWarning("Персонаж не имеет компонента CharacterInformation.");
-            }
+            doorRenderer.color = closedColor;
         }
     }
 }
