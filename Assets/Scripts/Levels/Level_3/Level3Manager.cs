@@ -149,16 +149,6 @@ public class Level3Manager : LevelManager
         ChooseMenu.SetActive(true);
     }
 
-    public void RestartScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    public void LoadNextScene()
-    {
-        SceneManager.LoadScene("Level_4");
-    }
-
     void Update()
     {
         if (PauseManager.IsPaused)
