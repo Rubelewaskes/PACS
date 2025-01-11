@@ -7,11 +7,15 @@ using System.Collections;
 public class Level1Manager : LevelManager
 {
     public CharacterSelection CharSel;
-
+    public GameObject ChooseMenu;
     public PauseManager Pause;
+    public Button start;
+    public Button pause;
 
+    private bool helpMenuOpened = false;
     // Панель информации о персонаже
     public GameObject helpMenu;
+    public HelpManager Help;
 
     private bool isPaused;
 
@@ -51,7 +55,7 @@ public class Level1Manager : LevelManager
 
             // Делаем активной третью подсказку
             ShowHintByID(2);
-
+            wasHints[2] = true; // Костыль, чтобы не выскакивал справочник несколько раз
             // После 5 секунд скрываем информацию
             StartCoroutine(CloseHint3());
         }
@@ -59,8 +63,8 @@ public class Level1Manager : LevelManager
 
     private IEnumerator CloseHint3()
     {
-        yield return new WaitForSecondsRealtime(5f);
-        CharSel.TriggerOnMouseDown();
+        yield return new WaitForSecondsRealtime(4f);
+        wasHints[2] = false;
         CloseHints(2, 3);
         OpenHelpMenu();
     }
@@ -72,6 +76,8 @@ public class Level1Manager : LevelManager
 
     public void ShowHint4()
     {
+        start.interactable = true;
+        pause.interactable = true;
         ShowHintByID(3);
     }
 
@@ -80,10 +86,15 @@ public class Level1Manager : LevelManager
         CloseHints(3, 4);
     }
 
-    public void LoadNextScene()
+    public void OpenChooseMenu()
     {
-        SceneManager.LoadScene("Level_2");
+        if (!helpMenuOpened) {
+            ChooseMenu.SetActive(true);
+        } else {
+            ChooseMenu.SetActive(false);
+        }
     }
+
 
     void Update()
     {

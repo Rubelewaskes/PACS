@@ -28,4 +28,14 @@ public abstract class LevelManager : MonoBehaviour
             }
         }
     }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadNextScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 }

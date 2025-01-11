@@ -23,7 +23,7 @@ public class HelpManager : MonoBehaviour
         }
 
         // Показываем информацию по умолчанию
-        ShowInfo(0);
+        ShowInfo(1);
     }
 
     void LoadDataFromJson()
