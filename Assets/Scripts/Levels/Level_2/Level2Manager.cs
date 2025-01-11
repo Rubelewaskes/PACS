@@ -102,16 +102,6 @@ public class Level2Manager : LevelManager
         }
     }
 
-    public void RestartScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    public void LoadNextScene()
-    {
-        SceneManager.LoadScene("Level_3");
-    }
-
     void Update()
     {
         if (PauseManager.IsPaused)
