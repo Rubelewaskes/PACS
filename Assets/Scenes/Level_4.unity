@@ -2601,6 +2601,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Certificate
       objectReference: {fileID: 0}
+    - target: {fileID: 9132075613787107457, guid: 190ff0ef4aa5f094e98bed5f38c50117, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
