@@ -9,11 +9,13 @@ public class PatrolScript : MonoBehaviour
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
-    private float waitTimer = 0f; 
+    private float waitTimer = 0f;
 
     private SpriteRenderer spriteRenderer;
 
     public UnityEvent PatrolComplete;
+
+    private bool isPatrolComplete = false; // Флаг завершения патруля
 
     void Start()
     {
@@ -22,7 +24,7 @@ public class PatrolScript : MonoBehaviour
 
         if (waypoints.Length > 0)
             agent.SetDestination(waypoints[currentWaypointIndex].position);
-        
+
         // Отключаем вращение NavMeshAgent
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -33,6 +35,8 @@ public class PatrolScript : MonoBehaviour
 
     void Update()
     {
+        if (isPatrolComplete) return; // Если патруль завершён, больше ничего не делаем
+
         if (waypoints.Length > 0)
         {
             // Проверка на паузу
@@ -51,10 +55,11 @@ public class PatrolScript : MonoBehaviour
                     if (currentWaypointIndex == waypoints.Length - 1)
                     {
                         OnPatrolComplete(); // Вызов события завершения патрулирования
+                        return; // Завершаем обновление
                     }
 
                     // Переход к следующей точке
-                    currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+                    currentWaypointIndex++;
                     agent.SetDestination(waypoints[currentWaypointIndex].position);
                     waitTimer = GetWaitTimeForCurrentWaypoint(); // Устанавливаем время ожидания для следующей точки
                 }
@@ -95,7 +100,8 @@ public class PatrolScript : MonoBehaviour
 
     public void OnPatrolComplete()
     {
-        PatrolComplete?.Invoke();
-        return;
+        isPatrolComplete = true; // Устанавливаем флаг завершения патруля
+        agent.isStopped = true; // Останавливаем NavMeshAgent
+        PatrolComplete?.Invoke(); // Вызываем событие завершения патруля
     }
 }
