@@ -80,26 +80,17 @@ public class Level2Manager : LevelManager
         if (!wasHints[6] && !wasHints[7])
         {
             CloseHints(6, 8);
-            wasHints[6] = true;
-            wasHints[7] = true;
             Help.ShowInfo(7);
         }
     }
-    public void HelpMenuOpenedToggle() {
-        if (helpMenuOpened == true) {
-            helpMenuOpened = false;
-        } else {
-            helpMenuOpened = true;
-        }
+    public void HelpMenuOpenedToggle() 
+    {
+        helpMenuOpened = !helpMenuOpened;
     }
 
     public void OpenChooseMenu()
     {
-        if (!helpMenuOpened) {
-            ChooseMenu.SetActive(true);
-        } else {
-            ChooseMenu.SetActive(false);
-        }
+        ChooseMenu.SetActive(!helpMenuOpened);
     }
 
     void Update()

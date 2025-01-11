@@ -15,7 +15,6 @@ public class Level1Manager : LevelManager
     private bool helpMenuOpened = false;
     // Панель информации о персонаже
     public GameObject helpMenu;
-    public HelpManager Help;
 
     private bool isPaused;
 
@@ -88,11 +87,7 @@ public class Level1Manager : LevelManager
 
     public void OpenChooseMenu()
     {
-        if (!helpMenuOpened) {
-            ChooseMenu.SetActive(true);
-        } else {
-            ChooseMenu.SetActive(false);
-        }
+        ChooseMenu.SetActive(!helpMenuOpened);
     }
 
 

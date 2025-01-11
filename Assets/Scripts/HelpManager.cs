@@ -8,7 +8,7 @@ public class HelpManager : MonoBehaviour
     public TMP_Text infoText;      // Поле для отображения информации
     public Button[] menuButtons;   // Массив кнопок меню
 
-    private HelpData helpData; // Данные из JSON
+    public HelpData helpData; // Данные из JSON
 
     void Start()
     {
@@ -17,8 +17,7 @@ public class HelpManager : MonoBehaviour
         // Привязываем события нажатия кнопок
         for (int i = 0; i < menuButtons.Length; i++)
         {
-            int index = i; // Локальная переменная для замыкания
-            menuButtons[i].onClick.AddListener(() => ShowInfo(index));
+            menuButtons[i].onClick.AddListener(() => ShowInfo(i));
             menuButtons[i].GetComponentInChildren<TMP_Text>().text = helpData.items[i].title; // Заголовки на кнопках
         }
 
