@@ -28,6 +28,18 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    public string GetCharacterNameById(int id)
+    {
+        foreach (CharacterInformation character in characters)
+        {
+            if (character.characterID == id)
+            {
+                return character.characterName;
+            }
+        }
+        return null;
+    }
+
     private void AssignName(CharacterInformation character, List<string> nameList)
     {
         int randomIndex = Random.Range(0, nameList.Count);
