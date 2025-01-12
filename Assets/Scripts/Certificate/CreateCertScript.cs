@@ -15,7 +15,7 @@ public class CreateCertScript : MonoBehaviour
     void Start(){
         if (CertificateData.Instance != null)
         {
-            txt2 = "Данный сертификат поддтверждает, что студент группы "+ CertificateData.Instance.FI + " " + CertificateData.Instance.Group + " успешно прошёл обучение в тренажёре СКУД и получил базовые знания о целях использования систем контроля и управления доступом.";
+            txt2 = "Данный сертификат поддтверждает, что студент группы "+ CertificateData.Instance.Group + " " + CertificateData.Instance.FI + " успешно прошёл обучение в тренажёре СКУД и получил базовые знания о целях использования систем контроля и управления доступом.";
             txt3 = "Дата " + endDate;
             txtField2.text = txt2;
             txtField3.text = txt3;
