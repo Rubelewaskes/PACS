@@ -43,7 +43,6 @@ public class ExitTrigger : MonoBehaviour
             countExited++;
             if (countExited == 10)
             {
-                fill.Filling();
                 chooseMenu.SetActive(true);
             }
         }

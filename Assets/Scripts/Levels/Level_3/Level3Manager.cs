@@ -9,19 +9,12 @@ public class Level3Manager : LevelManager
     public Button start;
     public Button pause;
 
-    private bool[] selected = {false, false, false};
-
     public PauseManager Pause;
     public HelpManager Help;
 
     public GameObject ChooseMenu;
 
     private bool isPaused;
-
-    // Кнопки выбора в конце
-    public Button var1Button;
-    public Button var2Button;
-    public Button var3Button;
 
     // Кнопки управления в конце
     public Button restartLevelButton;
@@ -30,13 +23,6 @@ public class Level3Manager : LevelManager
     public override void Start()
     {
         Pause.PauseGame();
-
-        restartLevelButton.gameObject.SetActive(false);
-        nextLevelButton.gameObject.SetActive(false);
-
-        var1Button.onClick.AddListener(() => { OnChoiceMade(var1Button); changeChooseButtonsColor(var1Button);}); // еба приколько так методы вызывать но я не уверен, что оно ваще надо
-        var2Button.onClick.AddListener(() => { OnChoiceMade(var2Button); changeChooseButtonsColor(var2Button);});
-        var3Button.onClick.AddListener(() => { OnChoiceMade(var3Button); changeChooseButtonsColor(var3Button);});
 
         for (int i = 0; i < hints.Length; i++)
         {
@@ -49,66 +35,6 @@ public class Level3Manager : LevelManager
         }
 
         StartCoroutine(ShowHints());
-    }
-
-    // Метод для обработки выбора
-    // тут чтобы кнопочки рестарта и некста появлялись
-    public void OnChoiceMade(Button selectedButton)
-    {
-        // Делаем кнопки выбора неактивными
-        var1Button.interactable = false;
-        var2Button.interactable = false;
-        var3Button.interactable = false;
-
-        // Показываем кнопки управления
-        restartLevelButton.gameObject.SetActive(true);
-        nextLevelButton.gameObject.SetActive(true);
-    }
-
-    public void changeChooseButtonsColor(Button selectedButton) { // эта ебола цвета меняет, как будто можно сделать компактнее, но мне похуй уже было
-        Color shadowGreen = new Color(0f, 1f, 0f, 0.5f);
-        Color shadowRed = new Color(1f, 0f, 0f, 0.5f);
-        if (selectedButton == var1Button) {
-            var var1ButtonColor = var1Button.colors;
-            var1ButtonColor.disabledColor = Color.green;
-            var1Button.colors = var1ButtonColor;
-
-            var var2ButtonColor = var2Button.colors;
-            var2ButtonColor.disabledColor = shadowRed;
-            var2Button.colors = var2ButtonColor;
-
-            var var3ButtonColor = var3Button.colors;
-            var3ButtonColor.disabledColor = shadowRed;
-            var3Button.colors = var3ButtonColor;
-        }
-
-        else if (selectedButton == var2Button) {
-            var var1ButtonColor = var1Button.colors;
-            var1ButtonColor.disabledColor = shadowGreen;
-            var1Button.colors = var1ButtonColor;
-
-            var var2ButtonColor = var2Button.colors;
-            var2ButtonColor.disabledColor = Color.red;
-            var2Button.colors = var2ButtonColor;
-
-            var var3ButtonColor = var3Button.colors;
-            var3ButtonColor.disabledColor = shadowRed;
-            var3Button.colors = var3ButtonColor;
-        }
-
-        else if (selectedButton == var3Button) {
-            var var1ButtonColor = var1Button.colors;
-            var1ButtonColor.disabledColor = shadowGreen;
-            var1Button.colors = var1ButtonColor;
-
-            var var2ButtonColor = var2Button.colors;
-            var2ButtonColor.disabledColor = shadowRed;
-            var2Button.colors = var2ButtonColor;
-
-            var var3ButtonColor = var3Button.colors;
-            var3ButtonColor.disabledColor = Color.red;
-            var3Button.colors = var3ButtonColor;
-        }
     }
 
     // Корутина для показа подсказок
@@ -131,7 +57,6 @@ public class Level3Manager : LevelManager
     public void StartGame()
     {
         StartCoroutine(ShowHintsAfterStart());
-        // OpenChooseMenu(); // тут я пытался вызвать его после отработки скрипта с хождением по комнате, но не получилось
     }
     
     private IEnumerator ShowHintsAfterStart()

@@ -8,13 +8,13 @@ public class Level1Manager : LevelManager
 {
     public CharacterSelection CharSel;
     public GameObject ChooseMenu;
+    public GameObject helpMenu;
+    public GameObject CharacterInfoPanel;
     public PauseManager Pause;
     public Button start;
     public Button pause;
-
-    private bool helpMenuOpened = false;
+    public Button helpButton;
     // Панель информации о персонаже
-    public GameObject helpMenu;
 
     private bool isPaused;
 
@@ -39,9 +39,9 @@ public class Level1Manager : LevelManager
     private IEnumerator ShowHints()
     {
         ShowHintByID(0);
-        yield return new WaitForSecondsRealtime(3f); // Используем WaitForSecondsRealtime, чтобы игнорировать паузу
+        yield return new WaitForSecondsRealtime(3f);
         ShowHintByID(1);
-        yield return new WaitForSecondsRealtime(1f); // Пауза не влияет на таймеры
+        yield return new WaitForSecondsRealtime(1f);
     }
 
     public void ShowCharacterInfo()
@@ -52,10 +52,8 @@ public class Level1Manager : LevelManager
             CloseHints(0, 2);
             
 
-            // Делаем активной третью подсказку
             ShowHintByID(2);
-            wasHints[2] = true; // Костыль, чтобы не выскакивал справочник несколько раз
-            // После 5 секунд скрываем информацию
+            wasHints[2] = true;
             StartCoroutine(CloseHint3());
         }
     }
@@ -66,6 +64,8 @@ public class Level1Manager : LevelManager
         wasHints[2] = false;
         CloseHints(2, 3);
         OpenHelpMenu();
+        CharacterInfoPanel.SetActive(false);
+        helpButton.interactable = true;
     }
 
     private void OpenHelpMenu()
@@ -87,7 +87,7 @@ public class Level1Manager : LevelManager
 
     public void OpenChooseMenu()
     {
-        ChooseMenu.SetActive(!helpMenuOpened);
+        ChooseMenu.SetActive(true);
     }
 
 
