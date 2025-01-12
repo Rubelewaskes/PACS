@@ -5,6 +5,7 @@ public class Level4Manager : LevelManager
 {
     public ButtonsFillScript fill;
     public GameObject ChooseMenu;
+    public GameObject chooseMenuButton;
     public Button[] varButtons;
     public Button nextLevelButton;
     public PauseManager Pause;
@@ -21,11 +22,29 @@ public class Level4Manager : LevelManager
 
         chooseRightButton();
         fill.Filling(rightButtonIndex, varButtons);
+
         for (int i = 0; i < varButtons.Length; i++)
         {
             int buttonIndex = i;
             varButtons[i].onClick.AddListener(() => changeChooseButtonsColor(buttonIndex));
         }
+
+        for (int i = 0; i < hints.Length; i++)
+        {
+            wasHints = new bool[hints.Length];
+            if (hints[i] != null)
+            {
+                hints[i].SetActive(true);
+                wasHints[i] = false;   
+            }
+        }
+
+        Pause.PauseGame();
+    }
+
+    public void closeStartHint() {
+        CloseHints(0, 1);
+        chooseMenuButton.SetActive(true);
     }
 
     public void OpenChooseMenu()

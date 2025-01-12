@@ -65,6 +65,10 @@ public class Level3Manager : LevelManager
         ShowHintByID(5);
         yield return new WaitForSecondsRealtime(1f);
         ShowHintByID(6);
+        yield return new WaitForSecondsRealtime(2f);
+        ShowHintByID(8);
+        yield return new WaitForSecondsRealtime(1f);
+        ShowHintByID(9);
         yield return new WaitForSecondsRealtime(3f);
         ShowHintByID(7);
     }
