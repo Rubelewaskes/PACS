@@ -80,7 +80,6 @@ public class Level2Manager : LevelManager
         if (!wasHints[6] && !wasHints[7])
         {
             CloseHints(6, 8);
-            Help.ShowInfo(7);
         }
     }
     public void HelpMenuOpenedToggle() 

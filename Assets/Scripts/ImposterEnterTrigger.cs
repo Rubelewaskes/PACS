@@ -20,7 +20,6 @@ public class ImposterEnterTrigger : MonoBehaviour
         {
             CharacterInformation imposterCharacterInformation = imposter.GetComponent<CharacterInformation>();
             SpriteRenderer imposterSpriteRenderer = imposter.GetComponent<SpriteRenderer>();
-
             if (imposterCharacterInformation != null && imposterSpriteRenderer != null)
             {
                 // Сохраняем исходное состояние
@@ -32,6 +31,7 @@ public class ImposterEnterTrigger : MonoBehaviour
                 accessibleRooms = imposterCharacterInformation.accessibleRooms;
 
                 originalSprite = imposterSpriteRenderer.sprite;
+
 
                 // Изменяем свойства персонажа
                 imposterCharacterInformation.CopyFrom(сharacterInformation);
